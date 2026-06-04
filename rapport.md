@@ -83,7 +83,24 @@ Ces évolutions ont rendu le parseur beaucoup plus robuste. C'était un prérequ
 
 # Chapitre 3 : Fiabilisation du code via les Linters, Checkers et Tests
 
-## 3.1 Conception des Checkers
+## 3.1 : L'infrastructure de validation Valiboky
+
+L'infrastructure de validation, nommée Valiboky, s'intègre à l'architecture de Pillar et Microdown pour automatiser l'application de règles de vérification sur les manuscrits. 
+
+Afin de traiter les différentes problématiques rencontrées par les auteurs d'ouvrages techniques, l'outil propose plusieurs grandes familles de règles :  
+- Typographie : Cette famille gère le respect des conventions d'écriture. L'outil vérifie par exemple qu'une légende n'est pas laissée vide ou que les règles de ponctuation anglaises et françaises sont respectées. C'est précisément dans cette catégorie que s'inscrivent mes développements sur la typographie anglophone et la validation des légendes.  
+
+- Vocabulaire : Ces règles assurent l'homogénéité du texte. Elles permettent d'interdire certains termes pour en privilégier d'autres, comme imposer l'utilisation de « subpresenter » en un seul mot au lieu de la version avec tiret « sub-presenter ».  
+
+- Affichage du code : Cette famille standardise le formatage technique. Elle vérifie par exemple l'utilisation stricte de tabulations pour l'indentation au lieu d'espaces, et s'assure de la présence d'une ligne vide après la signature d'une méthode pour garantir la lisibilité.  
+
+- Infrastructure : Cette catégorie valide la cohérence des liens et des fichiers. Elle va repérer les ancres dupliquées ou les références manquantes dans le document, tout en vérifiant que les noms des fichiers importés ne contiennent pas d'espaces. 
+
+- Sémantique : Il est crucial que les extraits de code dans un livre informatique soient corrects. L'outil évalue concrètement les blocs de code pour s'assurer que le résultat imprimé correspond à la réalité (par exemple, confirmer que l'expression 3+4 donne bien 7).  
+
+- Écarts d'évolution : Quand le logiciel documenté évolue, le livre doit suivre. L'infrastructure compare le code affiché dans le livre avec le code source réel du système pour signaler les fragments de code devenus obsolètes.  L'architecture de Valiboky repose sur des objets « Checkers » indépendants, ce qui rend le système entièrement modulaire et extensible. Mon rôle a été de m'approprier cette architecture pour concevoir et intégrer mes propres règles de vérification.  
+
+## 3.2 Conception des Checkers
 
 Pour éviter de produire des livres mal formatés, le projet s'appuie sur le **BookTester**. Il s'agit d'un Linter : un outil qui analyse le texte statiquement pour repérer les anomalies avant la compilation. Dans ce système, chaque règle de vérification isolée est appelée un Checker.
 
@@ -118,7 +135,7 @@ configureFrom: aDictionary
 
 Comme le montre cet extrait, l'utilisation de la méthode includes: sur la liste des paramètres permet d'adapter dynamiquement les attributs booléens du Checker avant son exécution.
 
-## 3.2 La culture du Test Unitaire et la méthode TDD
+## 3.3 La culture du Test Unitaire et la méthode TDD
 
 Sur un projet de cette taille, l'équipe applique strictement le TDD (Test-Driven Development). Ce paradigme impose d'écrire les tests automatisés avant même d'implémenter la logique métier. Tous mes développements devaient donc impérativement être couverts par des tests via SUnit (le framework de test de Pharo).
 Honnêtement, cette méthode exigeante m'a un peu ralenti au départ, le temps d'apprendre à anticiper le comportement du code. Mais j'ai vite compris son intérêt : elle m'a fait gagner un temps précieux en m'évitant des régressions, tout en m'apportant une vraie confiance dans la stabilité de mes outils.
@@ -139,7 +156,7 @@ Ce test démontre bien l'approche TDD : en simulant la création d'un bloc figur
 
 ![Test](image3.png)
 
-## 3.3 Refactoring et maintenance du code existant
+## 3.4 Refactoring et maintenance du code existant
 
 Au-delà de la création de nouveaux modules, j'ai aussi activement participé à l'amélioration du code existant. J'ai notamment refactorisé la méthode **visitParagraph** (PR #1073). Sa complexité cyclomatique était devenue trop importante avec le temps, il fallait la scinder pour garantir sa maintenabilité.
 
