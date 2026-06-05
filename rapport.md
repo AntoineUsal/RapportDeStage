@@ -1,3 +1,21 @@
+# Introduction Générale
+J'ai effectué mon stage de deuxième année de BUT Informatique au centre de recherche Inria, au sein de l'équipe Evref. Cette équipe travaille principalement sur l'évolution et la maintenance des logiciels. Elle est notamment chargée de développer et de maintenir Pharo, un langage et un environnement de programmation purement orienté objet.
+
+Pour documenter ce langage et accompagner la communauté, l'équipe rédige beaucoup de livres techniques. Cependant, écrire de tels ouvrages à plusieurs pose rapidement des problèmes : il faut s'assurer que les extraits de code fonctionnent toujours, que les références ne sont pas cassées et que les règles de typographie sont homogènes. Faire ces vérifications à la main sur des centaines de pages est chronophage et source d'erreurs.
+
+C'est pour répondre à ce problème que s'est défini mon sujet de stage. L'équipe a mis en place un écosystème de génération de documents basé sur Microdown (un langage de balisage) et développe actuellement Valiboky, un outil de validation automatique. Mon objectif a été d'améliorer cette infrastructure pour qu'elle détecte d'elle-même les erreurs dans les manuscrits avant leur compilation en PDF ou en LaTeX.
+
+Dans ce rapport, je vais détailler les différentes étapes de mon travail sur cet outil :
+
+- Le Chapitre 1 revient sur mon intégration dans l'équipe, ma découverte de l'environnement Pharo et de ses outils de versioning comme Iceberg.
+
+- Le Chapitre 2 explique le fonctionnement de l'analyse syntaxique (AST) et les corrections que j'ai apportées au parseur pour améliorer la traçabilité des erreurs.
+
+- Le Chapitre 3 est consacré au cœur de mon développement : la conception de mes propres règles de vérification (les Checkers) en appliquant la méthode TDD.
+
+- Le Chapitre 4 montre l'application concrète de ces développements lors de la génération de véritables livres, avec un focus sur la gestion de la typographie anglophone.
+
+
 # Chapitre 1 : Immersion au sein de l'équipe Evref et découverte de Pharo
 
 ## 1.1 L'équipe Evref et l'environnement Pharo
@@ -87,18 +105,23 @@ Ces évolutions ont rendu le parseur beaucoup plus robuste. C'était un prérequ
 
 L'infrastructure de validation, nommée Valiboky, s'intègre à l'architecture de Pillar et Microdown pour automatiser l'application de règles de vérification sur les manuscrits. 
 
-Afin de traiter les différentes problématiques rencontrées par les auteurs d'ouvrages techniques, l'outil propose plusieurs grandes familles de règles :  
-- Typographie : Cette famille gère le respect des conventions d'écriture. L'outil vérifie par exemple qu'une légende n'est pas laissée vide ou que les règles de ponctuation anglaises et françaises sont respectées. C'est précisément dans cette catégorie que s'inscrivent mes développements sur la typographie anglophone et la validation des légendes.  
+| Famille | Règle | Rôle |
+| :--- | :--- | :--- |
+| **Typographie** | *EMPTY CAPTION* | Vérifie qu'aucune légende n'est laissée vide. |
+| **Typographie** | *HEADER CAPITALIZATION* | Vérifie que les majuscules dans les titres suivent une stratégie cohérente. |
+| **Vocabulaire** | *VOCABULARY* | Utilise une liste de paires de mots pour interdire certains termes au profit d'autres. |
+| **Affichage Code**| *CODE INDENTATION* | Vérifie que les blocs de code utilisent bien des tabulations pour l'indentation et non des espaces. |
+| **Infrastructure**| *REFERENCE CHECKS* | Signale les définitions d'ancres dupliquées et les références manquantes. |
+| **Sémantique** | *CODE EXPRESSION TEST* | Évalue concrètement un bloc de code pour s'assurer que le résultat calculé est correct. |
+| **Évolution** | *DESYNCHRONIZED CODE* | Vérifie si les blocs de code sont bien synchronisés avec la version actuelle du système. |
 
-- Vocabulaire : Ces règles assurent l'homogénéité du texte. Elles permettent d'interdire certains termes pour en privilégier d'autres, comme imposer l'utilisation de « subpresenter » en un seul mot au lieu de la version avec tiret « sub-presenter ».  
+L'architecture repose sur des objets indépendants appelés « Checkers ». Mon rôle a été de m'approprier cette architecture pour concevoir et intégrer mes propres règles.
 
-- Affichage du code : Cette famille standardise le formatage technique. Elle vérifie par exemple l'utilisation stricte de tabulations pour l'indentation au lieu d'espaces, et s'assure de la présence d'une ligne vide après la signature d'une méthode pour garantir la lisibilité.  
+### Focus sur la règle : Empty Caption
 
-- Infrastructure : Cette catégorie valide la cohérence des liens et des fichiers. Elle va repérer les ancres dupliquées ou les références manquantes dans le document, tout en vérifiant que les noms des fichiers importés ne contiennent pas d'espaces. 
+Parmi toutes ces règles, on m'a confié le développement complet du vérificateur de légendes vides (le MicEmptyCaptionChecker). Son fonctionnement est simple : il parcourt l'arbre syntaxique du document et lève une erreur s'il croise une image ou une équation mathématique sans texte explicatif. C'est une vérification critique, car une image sans légende va complètement casser la génération de la table des figures lors de l'exportation du PDF.
 
-- Sémantique : Il est crucial que les extraits de code dans un livre informatique soient corrects. L'outil évalue concrètement les blocs de code pour s'assurer que le résultat imprimé correspond à la réalité (par exemple, confirmer que l'expression 3+4 donne bien 7).  
-
-- Écarts d'évolution : Quand le logiciel documenté évolue, le livre doit suivre. L'infrastructure compare le code affiché dans le livre avec le code source réel du système pour signaler les fragments de code devenus obsolètes.  L'architecture de Valiboky repose sur des objets « Checkers » indépendants, ce qui rend le système entièrement modulaire et extensible. Mon rôle a été de m'approprier cette architecture pour concevoir et intégrer mes propres règles de vérification.  
+Pour rendre l'outil plus souple pour les auteurs, je l'ai rendu paramétrable. Grâce à un dictionnaire de configuration, l'utilisateur peut choisir d'activer cette vérification uniquement pour les images, uniquement pour les formules mathématiques, ou bien pour les deux à la fois.
 
 ## 3.2 Conception des Checkers
 
@@ -197,18 +220,13 @@ Réussir à cibler ces nœuds a nécessité une compréhension fine du parcours 
 
 L'un des atouts majeurs de l'écosystème Pharo et Microdown pour le milieu académique est sa capacité à interagir nativement avec les standards de la recherche, et plus particulièrement avec LATEX.
 
-Validation statique des formules
+Validation statique des formules :<<<<>>>>
 Dans la rédaction d'ouvrages techniques, les équations sont primordiales. Comme évoqué dans le chapitre précédent, le **MicEmptyCaptionChecker** possède un attribut checkMath spécifiquement dédié à ces éléments. En Microdown, l'intégration de formules complexes se fait en utilisant la syntaxe classique de LATEX encadrée par des balises spécifiques (& pour l'équation, % pour les paramètres). Mon Checker vérifie rigoureusement que ces équations possèdent toutes une légende explicative.
 
 $$\sum_{i=a}^{b-1}f(i)\le\int_{a}^{b}f(t)dt$$
 
-Le rôle de Pillar dans la conversion finale
+Le rôle de Pillar dans la conversion finale :
 L'ingéniosité de l'architecture repose sur la séparation entre la représentation des données et leur affichage. Une fois que le Parseur a validé la syntaxe et transformé le bloc précédent en un nœud MicMathBlock au sein de l'Arbre Syntaxique, c'est le moteur Pillar qui prend le relais.
 
 En parcourant l'arbre grâce au design pattern Visitor, Pillar traduit dynamiquement chaque nœud dans le format de sortie cible. Lors d'une compilation destinée à l'impression, Pillar va automatiquement transposer ce nœud Microdown en un environnement \begin{equation} ... \end{equation} natif, garantissant ainsi une mise en page scientifique impeccable et conforme aux standards typographiques sans aucune intervention manuelle supplémentaire.
-
-
-
-
-
 
