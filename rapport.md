@@ -238,7 +238,7 @@ Pour rendre l'outil plus souple pour les auteurs, je l'ai rendu paramétrable. G
 
 Pour éviter de produire des livres mal formatés, le projet s'appuie sur le **BookTester**. Il s'agit d'un Linter : un outil qui analyse le texte statiquement pour repérer les anomalies avant la compilation. Dans ce système, chaque règle de vérification isolée est appelée un Checker.
 
-![mvc](mvc  .png)
+![mvc](mvc.png)
 
 On m'a confié la conception intégrale du **MicEmptyCaptionChecker** (Issue [#1065](https://github.com/pillar-markup/Microdown/issues/1065)). Son rôle métier est de s'assurer qu'aucune image ou expression mathématique n'est insérée sans légende (caption). Pour que l'outil soit plus flexible pour les utilisateurs, j'ai pris l'initiative de le rendre paramétrable. J'y ai ajouté une configuration via un dictionnaire, permettant d'activer ou de désactiver spécifiquement certaines vérifications.
 
