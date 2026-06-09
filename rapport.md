@@ -34,7 +34,7 @@ Mon intégration s'est voulue très concrète. Dès les premiers jours, j'ai dû
 
 L'autre défi de mon arrivée a été d'apprendre à travailler à plusieurs sur un projet open source de cette taille. Comme tout tourne dans une Image, Git ne s'utilise pas en ligne de commande de façon classique. Il faut passer par Iceberg, le client Git spécifiquement intégré à Pharo.
 
-Après une configuration un peu exigeante (notamment pour les clés SSH), je me suis heurté à la réalité du code en équipe. Mes premiers essais d'intégration ont provoqué pas mal de conflits, allant jusqu'à créer des "classes fantômes" sur mon poste. Pour m'en sortir, j'ai dû comprendre comment nettoyer mon environnement et gérer mes commits depuis l'interface d'Iceberg. C'était complexe sur le moment, mais très utile. J'ai vite assimilé la méthode de travail : isoler un problème sur une branche liée à une Issue, corriger, tester en local, puis soumettre une Pull Request bien propre. C'est cette rigueur qui m'a permis d'intégrer mes premiers correctifs sur Microdown et Pillar dès le début du stage (PR #1030 et #1031).
+Après une configuration un peu exigeante (notamment pour les clés SSH), je me suis heurté à la réalité du code en équipe. Mes premiers essais d'intégration ont provoqué pas mal de conflits, allant jusqu'à créer des "classes fantômes" sur mon poste. Pour m'en sortir, j'ai dû comprendre comment nettoyer mon environnement et gérer mes commits depuis l'interface d'Iceberg. C'était complexe sur le moment, mais très utile. J'ai vite assimilé la méthode de travail : isoler un problème sur une branche liée à une Issue, corriger, tester en local, puis soumettre une Pull Request bien propre. C'est cette rigueur qui m'a permis d'intégrer mes premiers correctifs sur Microdown et Pillar dès le début du stage ([PR #1030](https://github.com/pillar-markup/Microdown/pull/1030) et [#1031](https://github.com/pillar-markup/Microdown/pull/1031)).
 
 ![IceBerg](image2.png)
 
@@ -71,7 +71,7 @@ graph LR
 ## 2.2 Amélioration de la traçabilité : Lignes et Fichiers inclus
 
 J'ai passé beaucoup de temps à fiabiliser cet arbre syntaxique. Le but technique était clair : le système devait pouvoir indiquer à l'utilisateur la ligne et le fichier exacts de n'importe quelle erreur de syntaxe.
-J'ai commencé par m'occuper du comptage des lignes avec la propriété **startLine** (Issue #1064). Le problème se posait sur les éléments imbriqués : le parseur donnait bien la ligne de départ à l'élément enfant, mais oubliait de transmettre l'information au bloc parent conteneur. L'arbre final était donc incomplet. J'ai revu la logique d'assignation pour forcer la donnée à remonter d'un niveau à l'autre.
+J'ai commencé par m'occuper du comptage des lignes avec la propriété **startLine** (Issue [#1064](https://github.com/pillar-markup/Microdown/issues/1064)). Le problème se posait sur les éléments imbriqués : le parseur donnait bien la ligne de départ à l'élément enfant, mais oubliait de transmettre l'information au bloc parent conteneur. L'arbre final était donc incomplet. J'ai revu la logique d'assignation pour forcer la donnée à remonter d'un niveau à l'autre.
 
 ```smalltalk
 nodeToInit := nextNode.
@@ -81,7 +81,7 @@ nodeToInit := nextNode.
 ```
 
 À la lecture de cet extrait, on remarque que la boucle permet de remonter dynamiquement la hiérarchie pour affecter le numéro de ligne courant aux blocs parents précédemment instanciés.
-Ensuite, je me suis penché sur les documents inclus (Issue #1091). En Microdown, on peut importer un fichier externe dans un document principal. Avant mon intervention, si le fichier importé contenait une erreur, le système accusait à tort le document principal, ce qui rendait le débogage très difficile. J'ai donc développé le **MicSecondaryRootBlock**, un type de nœud conçu exclusivement pour mémoriser la référence d'origine du fichier inclus.
+Ensuite, je me suis penché sur les documents inclus (Issue [#1091](https://github.com/pillar-markup/Microdown/issues/1091)). En Microdown, on peut importer un fichier externe dans un document principal. Avant mon intervention, si le fichier importé contenait une erreur, le système accusait à tort le document principal, ce qui rendait le débogage très difficile. J'ai donc développé le **MicSecondaryRootBlock**, un type de nœud conçu exclusivement pour mémoriser la référence d'origine du fichier inclus.
 
 ```smalltalk
 testFileProperty
@@ -142,7 +142,7 @@ classDiagram
     }
     MicAbstractChecker <|-- MicEmptyCaptionChecker
 ```
-On m'a confié la conception intégrale du **MicEmptyCaptionChecker** (Issue #1065). Son rôle métier est de s'assurer qu'aucune image ou expression mathématique n'est insérée sans légende (caption). Pour que l'outil soit plus flexible pour les utilisateurs, j'ai pris l'initiative de le rendre paramétrable. J'y ai ajouté une configuration via un dictionnaire, permettant d'activer ou de désactiver spécifiquement certaines vérifications.
+On m'a confié la conception intégrale du **MicEmptyCaptionChecker** (Issue [#1065](https://github.com/pillar-markup/Microdown/issues/1065)). Son rôle métier est de s'assurer qu'aucune image ou expression mathématique n'est insérée sans légende (caption). Pour que l'outil soit plus flexible pour les utilisateurs, j'ai pris l'initiative de le rendre paramétrable. J'y ai ajouté une configuration via un dictionnaire, permettant d'activer ou de désactiver spécifiquement certaines vérifications.
 
 ```smalltalk
 configureFrom: aDictionary
@@ -181,9 +181,9 @@ Ce test démontre bien l'approche TDD : en simulant la création d'un bloc figur
 
 ## 3.4 Refactoring et maintenance du code existant
 
-Au-delà de la création de nouveaux modules, j'ai aussi activement participé à l'amélioration du code existant. J'ai notamment refactorisé la méthode **visitParagraph** (PR #1073). Sa complexité cyclomatique était devenue trop importante avec le temps, il fallait la scinder pour garantir sa maintenabilité.
+Au-delà de la création de nouveaux modules, j'ai aussi activement participé à l'amélioration du code existant. J'ai notamment refactorisé la méthode **visitParagraph** (PR [#1073](https://github.com/pillar-markup/Microdown/pull/1073)). Sa complexité cyclomatique était devenue trop importante avec le temps, il fallait la scinder pour garantir sa maintenabilité.
 
-J'ai également corrigé des anomalies critiques qui bloquaient purement et simplement la chaîne de génération des livres documentaires. L'une des interventions les plus notables a été la correction d'une sensibilité à la casse dans les chemins de fichiers (Issue #1075), qui faisait échouer la compilation sur certains systèmes d'exploitation. Enfin, j'ai contribué à la migration du projet vers la version 14 de Pharo (Issue #1082), un travail de fond nécessitant de remplacer de nombreuses méthodes dépréciées.
+J'ai également corrigé des anomalies critiques qui bloquaient purement et simplement la chaîne de génération des livres documentaires. L'une des interventions les plus notables a été la correction d'une sensibilité à la casse dans les chemins de fichiers (Issue [#1075](https://github.com/pillar-markup/Microdown/issues/1075)), qui faisait échouer la compilation sur certains systèmes d'exploitation. Enfin, j'ai contribué à la migration du projet vers la version 14 de Pharo (Issue [#1082](https://github.com/pillar-markup/Microdown/issues/1082)), un travail de fond nécessitant de remplacer de nombreuses méthodes dépréciées.
 
 ---
 
