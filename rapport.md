@@ -54,6 +54,7 @@
 
 - [Chapitre 1 : Immersion au sein de l'équipe Evref et découverte de Pharo](#chapitre-1--immersion-au-sein-de-léquipe-evref-et-découverte-de-pharo)
   - [1.1 L'équipe Evref et l'environnement Pharo](#11-léquipe-evref-et-lenvironnement-pharo)
+  - [1.1.1 Petit guide : comprendre la syntaxe Pharo](#111-Petit-guide-comprendre-la-syntaxe-Pharo)
   - [1.2 Outils de versioning et cycle de développement avec Iceberg](#12-outils-de-versioning-et-cycle-de-développement-avec-iceberg)
 
 - [Chapitre 2 : Modélisation et Analyse Syntaxique avec Microdown](#chapitre-2--modélisation-et-analyse-syntaxique-avec-microdown)
@@ -136,6 +137,40 @@ Mon intégration s'est voulue très concrète. Dès les premiers jours, j'ai dû
 
 
 ![Ide](image1.png)
+
+### 1.1.1 Petit guide : comprendre la syntaxe Pharo
+
+L'environnement Pharo repose sur un paradigme où la règle "tout est objet" est poussée à son paroxysme. Héritier du langage Smalltalk, sa syntaxe diffère grandement des langages classiques enseignés à l'IUT comme Java, C++ ou Python.
+
+Pour faciliter la lecture des extraits de code présents dans ce rapport, voici les 4 concepts fondamentaux à retenir :
+
+**1. L'envoi de message**
+En Pharo, il n'y a ni points ni parenthèses pour appeler une méthode. L'exécution se fait par "l'envoi d'un message" à un objet, séparé par un espace. Si la méthode prend un paramètre, on utilise les deux-points `:`.
+* *En Java / Python :* `objet.methode(parametre)`
+* *En Pharo :* `objet methode: parametre`
+
+**2. La déclaration et l'affectation de variables**
+Les variables locales d'une méthode doivent toujours être déclarées au tout début, encadrées par des barres verticales `|`. L'affectation d'une valeur se fait ensuite avec le symbole `:=`.
+* *En Java :* `int maVariable = 5;`
+* *En Pharo :*
+  ```smalltalk
+  | maVariable |
+  maVariable := 5.
+  ```
+**3. Le retour d'une méthode**
+Le mot-clé return n'existe pas en Pharo. Il est remplacé par un simple accent circonflexe ^ placé devant l'expression à retourner.
+
+En Java / C++ : `return true`;
+
+En Pharo : `^ true`
+
+C'est le concept le plus important pour lire du code Pharo. Le code exécutable peut être stocké dans des "Blocs", délimités par des crochets [ ]. Ces blocs sont très utilisés pour les conditions ou les boucles. S'ils prennent un paramètre, celui-ci est déclaré avec un : et séparé du code par une barre verticale |.
+
+En Java : `x -> x.faireQuelqueChose()`
+
+En Pharo : `[ :x | x faireQuelqueChose ]`
+
+Avec ces quelques règles en tête, l'architecture et la logique des Checkers présentés dans les chapitres suivants deviennent beaucoup plus intuitives à appréhender pour un développeur habitué aux syntaxes traditionnelles.
 
 ## 1.2 Outils de versioning et cycle de développement avec Iceberg
 
@@ -342,3 +377,5 @@ Techniquement, l'arrivée sur Pharo a été un gros défi. Le fait que "tout soi
 Au-delà de la technique pure, j'ai surtout découvert la réalité du travail en équipe au quotidien. Entre la gestion des versions avec Iceberg, les Pull Requests et les revues de code, j'ai compris les véritables enjeux d'un projet de grande ampleur : la communication, la rigueur et la maintenabilité.
 
 Finalement, ce stage m'a apporté une vraie méthode de travail, mais il m'a surtout fait découvrir de l'intérieur le monde de la recherche en informatique. Travailler dans un labo institutionnel, au milieu de chercheurs passionnés qui font évoluer leur propre langage, est très différent de l'image que j'avais de l'entreprise classique. La réflexion autour du code, l'innovation et le partage des connaissances à travers l'open source et la rédaction de livres sont au centre de tout. Ça a été une excellente expérience, très enrichissante, qui m'a donné une vision beaucoup plus large de l'informatique pour la suite de mon parcours.
+
+<div style="page-break-after: always;"></div>
