@@ -51,21 +51,26 @@
 # Table des Matières
 
 - [Introduction](#introduction)
+
 - [Chapitre 1 : Immersion au sein de l'équipe Evref et découverte de Pharo](#chapitre-1--immersion-au-sein-de-léquipe-evref-et-découverte-de-pharo)
   - [1.1 L'équipe Evref et l'environnement Pharo](#11-léquipe-evref-et-lenvironnement-pharo)
   - [1.2 Outils de versioning et cycle de développement avec Iceberg](#12-outils-de-versioning-et-cycle-de-développement-avec-iceberg)
+
 - [Chapitre 2 : Modélisation et Analyse Syntaxique avec Microdown](#chapitre-2--modélisation-et-analyse-syntaxique-avec-microdown)
   - [2.1 Le rôle de l'arbre syntaxique (AST)](#21-le-rôle-de-larbre-syntaxique-ast)
   - [2.2 Amélioration de la traçabilité : Lignes et Fichiers inclus](#22-amélioration-de-la-traçabilité--lignes-et-fichiers-inclus)
+
 - [Chapitre 3 : Fiabilisation du code via les Linters, Checkers et Tests](#chapitre-3--fiabilisation-du-code-via-les-linters-checkers-et-tests)
   - [3.1 L'infrastructure de validation Valiboky](#31-linfrastructure-de-validation-valiboky)
   - [3.2 Conception des Checkers](#32-conception-des-checkers)
   - [3.3 La culture du Test Unitaire et la méthode TDD](#33-la-culture-du-test-unitaire-et-la-méthode-tdd)
   - [3.4 Refactoring et maintenance du code existant](#34-refactoring-et-maintenance-du-code-existant)
+
 - [Chapitre 4 : Application pratique : Génération de livres et règles typographiques](#chapitre-4--application-pratique--génération-de-livres-et-règles-typographiques)
   - [4.1 De la validation statique à la production d'ouvrages](#41-de-la-validation-statique-à-la-production-douvrages)
   - [4.2 Gestion et automatisation de la typographie anglophone](#42-gestion-et-automatisation-de-la-typographie-anglophone)
   - [4.3 Traitement des expressions mathématiques et exportation vers LATEX](#43-traitement-des-expressions-mathématiques-et-exportation-vers-latex)
+
 - [Conclusion](#conclusion)
 
 </div>
@@ -91,6 +96,28 @@ Dans ce rapport, je vais détailler les différentes étapes de mon travail sur 
 - Le Chapitre 3 est consacré au cœur de mon développement : la conception de mes propres règles de vérification (les Checkers) en appliquant la méthode TDD.
 
 - Le Chapitre 4 montre l'application concrète de ces développements lors de la génération de véritables livres, avec un focus sur la gestion de la typographie anglophone.
+
+<div style="page-break-after: always;"></div>
+
+<div style="page-break-before: always;"></div> 
+
+# Introduction
+
+I did my second-year Computer Science BUT internship at the Inria research center, within the Evref team. This team mainly works on software evolution and maintenance. In particular, it is responsible for developing and maintaining Pharo, a purely object-oriented programming language and environment.
+
+To document this language and support the community, the team writes many technical books. However, writing such books together quickly causes problems: we must make sure that the code examples still work, that references are not broken, and that typography rules are consistent. Doing these checks by hand on hundreds of pages takes a lot of time and is a source of errors.
+
+My internship topic was defined to answer this problem. The team set up a document generation ecosystem based on Microdown (a markup language) and is currently developing Valiboky, an automatic validation tool. My goal was to improve this infrastructure so that it detects errors in manuscripts by itself before they are compiled into PDF or LaTeX.
+
+In this report, I will detail the different steps of my work on this tool:
+
+- **Chapter 1** looks back at my integration into the team, my discovery of the Pharo environment and its version control tools like Iceberg.
+
+- **Chapter 2** explains how the syntax analysis (AST) works and the corrections I made to the parser to improve error traceability.
+
+- **Chapter 3** is dedicated to the core of my development: the design of my own verification rules (the Checkers) by applying the TDD method.
+
+- **Chapter 4** shows the concrete application of these developments during the generation of real books, with a focus on managing English typography.
 
 <div style="page-break-after: always;"></div>
 
