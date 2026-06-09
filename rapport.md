@@ -230,3 +230,12 @@ L'ingéniosité de l'architecture repose sur la séparation entre la représenta
 
 En parcourant l'arbre grâce au design pattern Visitor, Pillar traduit dynamiquement chaque nœud dans le format de sortie cible. Lors d'une compilation destinée à l'impression, Pillar va automatiquement transposer ce nœud Microdown en un environnement \begin{equation} ... \end{equation} natif, garantissant ainsi une mise en page scientifique impeccable et conforme aux standards typographiques sans aucune intervention manuelle supplémentaire.
 
+
+# Conclusion
+Ce stage de deuxième année chez Evref a été une étape marquante de mon BUT. Pouvoir travailler dans un véritable laboratoire de recherche sur un projet open source donne tout de suite beaucoup plus de sens au travail que l'on fournit.
+
+Techniquement, l'arrivée sur Pharo a été un gros défi. Le fait que "tout soit objet" m'a forcé à repenser ma manière d'aborder la programmation par rapport aux langages vus à l'IUT. J'ai aussi pu appliquer concrètement des concepts vus en cours (comme les arbres syntaxiques) et me frotter à des méthodes exigeantes comme le TDD. Même si cela m'a demandé un vrai temps d'adaptation, c'est très gratifiant de savoir qu'aujourd'hui, les modules de vérification que j'ai développés tournent réellement pour valider les livres officiels de Pharo.
+
+Au-delà de la technique pure, j'ai surtout découvert la réalité du travail en équipe au quotidien. Entre la gestion des versions avec Iceberg, les Pull Requests et les revues de code, j'ai compris les véritables enjeux d'un projet de grande ampleur : la communication, la rigueur et la maintenabilité.
+
+Finalement, ce stage m'a apporté une vraie méthode de travail, mais il m'a surtout fait découvrir de l'intérieur le monde de la recherche en informatique. Travailler dans un labo institutionnel, au milieu de chercheurs passionnés qui font évoluer leur propre langage, est très différent de l'image que j'avais de l'entreprise classique. La réflexion autour du code, l'innovation et le partage des connaissances à travers l'open source et la rédaction de livres sont au centre de tout. Ça a été une excellente expérience, très enrichissante, qui m'a donné une vision beaucoup plus large de l'informatique pour la suite de mon parcours.
