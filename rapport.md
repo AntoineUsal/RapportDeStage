@@ -1,4 +1,81 @@
-# Introduction Générale
+<div style="page-break-before: always;"></div> 
+
+<center><img src="iut.png" alt="Logo IUT Lille" width="300"></center>
+<br>
+
+<br><br>
+<center>
+  <b>Université de Lille</b><br>
+  IUT de Lille<br>
+  Département informatique
+</center>
+
+<br><br><br><br><br>
+
+<center>
+  <h1>Extensions du parseur Microdown et conception d'un Linter en environnement Pharo</h1>
+  <br>
+  <h3>Rapport de stage</h3>
+  soutenu le 23 Juin 2026
+  <br><br><br>
+  par
+  <br><br>
+  <b>Antoine USAL</b>
+</center>
+
+<br><br><br><br><br>
+
+<table style="width: 80%; margin: 0 auto; border: none;">
+  <tr style="background-color: transparent;">
+    <td style="border: none; text-align: left; font-weight: bold; width: 50%;">Encadrant entreprise :</td>
+    <td style="border: none; text-align: left;">Stéphane Ducasse</td>
+  </tr>
+  <tr style="background-color: transparent;">
+    <td style="border: none; text-align: left; font-weight: bold;">Encadrant universitaire :</td>
+    <td style="border: none; text-align: left;">Géry Casiez</td>
+  </tr>
+</table>
+
+<br><br>
+<center>
+  <b>Centre de Recherche Inria - Équipe Evref</b>
+</center>
+
+<div style="page-break-after: always;"></div>
+
+
+<div style="page-break-before: always;"></div> 
+
+<div style="width: 75%; margin: 0 auto; padding-top: 15vh;">
+
+# Table des Matières
+
+- [Introduction](#introduction)
+- [Chapitre 1 : Immersion au sein de l'équipe Evref et découverte de Pharo](#chapitre-1--immersion-au-sein-de-léquipe-evref-et-découverte-de-pharo)
+  - [1.1 L'équipe Evref et l'environnement Pharo](#11-léquipe-evref-et-lenvironnement-pharo)
+  - [1.2 Outils de versioning et cycle de développement avec Iceberg](#12-outils-de-versioning-et-cycle-de-développement-avec-iceberg)
+- [Chapitre 2 : Modélisation et Analyse Syntaxique avec Microdown](#chapitre-2--modélisation-et-analyse-syntaxique-avec-microdown)
+  - [2.1 Le rôle de l'arbre syntaxique (AST)](#21-le-rôle-de-larbre-syntaxique-ast)
+  - [2.2 Amélioration de la traçabilité : Lignes et Fichiers inclus](#22-amélioration-de-la-traçabilité--lignes-et-fichiers-inclus)
+- [Chapitre 3 : Fiabilisation du code via les Linters, Checkers et Tests](#chapitre-3--fiabilisation-du-code-via-les-linters-checkers-et-tests)
+  - [3.1 L'infrastructure de validation Valiboky](#31-linfrastructure-de-validation-valiboky)
+  - [3.2 Conception des Checkers](#32-conception-des-checkers)
+  - [3.3 La culture du Test Unitaire et la méthode TDD](#33-la-culture-du-test-unitaire-et-la-méthode-tdd)
+  - [3.4 Refactoring et maintenance du code existant](#34-refactoring-et-maintenance-du-code-existant)
+- [Chapitre 4 : Application pratique : Génération de livres et règles typographiques](#chapitre-4--application-pratique--génération-de-livres-et-règles-typographiques)
+  - [4.1 De la validation statique à la production d'ouvrages](#41-de-la-validation-statique-à-la-production-douvrages)
+  - [4.2 Gestion et automatisation de la typographie anglophone](#42-gestion-et-automatisation-de-la-typographie-anglophone)
+  - [4.3 Traitement des expressions mathématiques et exportation vers LATEX](#43-traitement-des-expressions-mathématiques-et-exportation-vers-latex)
+- [Conclusion](#conclusion)
+
+</div>
+
+<div style="page-break-after: always;"></div>
+
+
+<div style="page-break-before: always;"></div> 
+
+# Introduction
 J'ai effectué mon stage de deuxième année de BUT Informatique au centre de recherche Inria, au sein de l'équipe Evref. Cette équipe travaille principalement sur l'évolution et la maintenance des logiciels. Elle est notamment chargée de développer et de maintenir Pharo, un langage et un environnement de programmation purement orienté objet.
 
 Pour documenter ce langage et accompagner la communauté, l'équipe rédige beaucoup de livres techniques. Cependant, écrire de tels ouvrages à plusieurs pose rapidement des problèmes : il faut s'assurer que les extraits de code fonctionnent toujours, que les références ne sont pas cassées et que les règles de typographie sont homogènes. Faire ces vérifications à la main sur des centaines de pages est chronophage et source d'erreurs.
@@ -15,6 +92,9 @@ Dans ce rapport, je vais détailler les différentes étapes de mon travail sur 
 
 - Le Chapitre 4 montre l'application concrète de ces développements lors de la génération de véritables livres, avec un focus sur la gestion de la typographie anglophone.
 
+<div style="page-break-after: always;"></div>
+
+<div style="page-break-before: always;"></div> 
 
 # Chapitre 1 : Immersion au sein de l'équipe Evref et découverte de Pharo
 
@@ -38,7 +118,9 @@ Après une configuration un peu exigeante (notamment pour les clés SSH), je me 
 
 ![IceBerg](image2.png)
 
---- 
+<div style="page-break-after: always;"></div>
+
+<div style="page-break-before: always;"></div> 
 
 # Chapitre 2 : Modélisation et Analyse Syntaxique avec Microdown
 
@@ -97,7 +179,9 @@ testFileProperty
 Cet extrait de test unitaire illustre bien la vérification du comportement attendu : on s'assure ici que la propriété file du nouveau nœud conserve fidèlement la chaîne de caractères pointant vers le fichier source.
 Ces évolutions ont rendu le parseur beaucoup plus robuste. C'était un prérequis indispensable avant de développer la suite des outils de vérification.
 
---- 
+<div style="page-break-after: always;"></div>
+
+<div style="page-break-before: always;"></div> 
 
 # Chapitre 3 : Fiabilisation du code via les Linters, Checkers et Tests
 
@@ -127,21 +211,8 @@ Pour rendre l'outil plus souple pour les auteurs, je l'ai rendu paramétrable. G
 
 Pour éviter de produire des livres mal formatés, le projet s'appuie sur le **BookTester**. Il s'agit d'un Linter : un outil qui analyse le texte statiquement pour repérer les anomalies avant la compilation. Dans ce système, chaque règle de vérification isolée est appelée un Checker.
 
-```mermaid
-classDiagram
-    class MicAbstractChecker {
-        <<abstract>>
-        +configureFrom(aDictionary)
-    }
-    class MicEmptyCaptionChecker {
-        -checkCode : Boolean
-        -checkFigure : Boolean
-        -checkMath : Boolean
-        +configureFrom(aDictionary)
-        +checkCaptionOf(aBlock)
-    }
-    MicAbstractChecker <|-- MicEmptyCaptionChecker
-```
+![mvc](mvc  .png)
+
 On m'a confié la conception intégrale du **MicEmptyCaptionChecker** (Issue [#1065](https://github.com/pillar-markup/Microdown/issues/1065)). Son rôle métier est de s'assurer qu'aucune image ou expression mathématique n'est insérée sans légende (caption). Pour que l'outil soit plus flexible pour les utilisateurs, j'ai pris l'initiative de le rendre paramétrable. J'y ai ajouté une configuration via un dictionnaire, permettant d'activer ou de désactiver spécifiquement certaines vérifications.
 
 ```smalltalk
@@ -185,7 +256,9 @@ Au-delà de la création de nouveaux modules, j'ai aussi activement participé �
 
 J'ai également corrigé des anomalies critiques qui bloquaient purement et simplement la chaîne de génération des livres documentaires. L'une des interventions les plus notables a été la correction d'une sensibilité à la casse dans les chemins de fichiers (Issue [#1075](https://github.com/pillar-markup/Microdown/issues/1075)), qui faisait échouer la compilation sur certains systèmes d'exploitation. Enfin, j'ai contribué à la migration du projet vers la version 14 de Pharo (Issue [#1082](https://github.com/pillar-markup/Microdown/issues/1082)), un travail de fond nécessitant de remplacer de nombreuses méthodes dépréciées.
 
----
+<div style="page-break-after: always;"></div>
+
+<div style="page-break-before: always;"></div> 
 
 # Chapitre 4 : Application pratique : Génération de livres et règles typographiques
 
@@ -220,7 +293,7 @@ Réussir à cibler ces nœuds a nécessité une compréhension fine du parcours 
 
 L'un des atouts majeurs de l'écosystème Pharo et Microdown pour le milieu académique est sa capacité à interagir nativement avec les standards de la recherche, et plus particulièrement avec LATEX.
 
-Validation statique des formules :<<<<>>>>
+### Validation statique des formules :
 Dans la rédaction d'ouvrages techniques, les équations sont primordiales. Comme évoqué dans le chapitre précédent, le **MicEmptyCaptionChecker** possède un attribut checkMath spécifiquement dédié à ces éléments. En Microdown, l'intégration de formules complexes se fait en utilisant la syntaxe classique de LATEX encadrée par des balises spécifiques (& pour l'équation, % pour les paramètres). Mon Checker vérifie rigoureusement que ces équations possèdent toutes une légende explicative.
 
 $$\sum_{i=a}^{b-1}f(i)\le\int_{a}^{b}f(t)dt$$
@@ -230,6 +303,9 @@ L'ingéniosité de l'architecture repose sur la séparation entre la représenta
 
 En parcourant l'arbre grâce au design pattern Visitor, Pillar traduit dynamiquement chaque nœud dans le format de sortie cible. Lors d'une compilation destinée à l'impression, Pillar va automatiquement transposer ce nœud Microdown en un environnement \begin{equation} ... \end{equation} natif, garantissant ainsi une mise en page scientifique impeccable et conforme aux standards typographiques sans aucune intervention manuelle supplémentaire.
 
+<div style="page-break-after: always;"></div>
+
+<div style="page-break-before: always;"></div> 
 
 # Conclusion
 Ce stage de deuxième année chez Evref a été une étape marquante de mon BUT. Pouvoir travailler dans un véritable laboratoire de recherche sur un projet open source donne tout de suite beaucoup plus de sens au travail que l'on fournit.
