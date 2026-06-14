@@ -90,13 +90,13 @@ C'est pour répondre à ce problème que s'est défini mon sujet de stage. L'éq
 
 Dans ce rapport, je vais détailler les différentes étapes de mon travail sur cet outil :
 
-- Le Chapitre 1 revient sur mon intégration dans l'équipe, ma découverte de l'environnement Pharo et de ses outils de versioning comme Iceberg.
+- Le **Chapitre 1** revient sur mon intégration dans l'équipe, ma découverte de l'environnement Pharo et de ses outils de versioning comme Iceberg.
 
-- Le Chapitre 2 explique le fonctionnement de l'analyse syntaxique (AST) et les corrections que j'ai apportées au parseur pour améliorer la traçabilité des erreurs.
+- Le **Chapitre 2** explique le fonctionnement de l'analyse syntaxique (AST) et les corrections que j'ai apportées au parseur pour améliorer la traçabilité des erreurs.
 
-- Le Chapitre 3 est consacré au cœur de mon développement : la conception de mes propres règles de vérification (les Checkers) en appliquant la méthode TDD.
+- Le **Chapitre 3** est consacré au cœur de mon développement : la conception de mes propres règles de vérification (les Checkers) en appliquant la méthode TDD.
 
-- Le Chapitre 4 montre l'application concrète de ces développements lors de la génération de véritables livres, avec un focus sur la gestion de la typographie anglophone.
+- Le **Chapitre 4** montre l'application concrète de ces développements lors de la génération de véritables livres, avec un focus sur la gestion de la typographie anglophone.
 
 <div style="page-break-after: always;"></div>
 
@@ -104,21 +104,21 @@ Dans ce rapport, je vais détailler les différentes étapes de mon travail sur 
 
 # Introduction
 
-I did my second-year Computer Science BUT internship at the Inria research center, within the Evref team. This team mainly works on software evolution and maintenance. In particular, it is responsible for developing and maintaining Pharo, a purely object-oriented programming language and environment.
+I did my second-year Computer Science BUT work experience at the Inria research center, within the Evref team. This team mainly works on software evolution and maintenance. It is particulary responsible for developping and maintaining Pharo, a purely object-oriented programming language and environment.
 
-To document this language and support the community, the team writes many technical books. However, writing such books together quickly causes problems: we must make sure that the code examples still work, that references are not broken, and that typography rules are consistent. Doing these checks by hand on hundreds of pages takes a lot of time and is a source of errors.
+To document this language and support the community, the team writes a lot of technical books. However, writing such books together quickly causes problems: we must make sure that the code examples still work, that references are not broken, and that typography rules are consistent. Doing these checks by hand and pen on hundreds of pages takes a lot of time and will eventually be a source of errors.
 
-My internship topic was defined to answer this problem. The team set up a document generation ecosystem based on Microdown (a markup language) and is currently developing Valiboky, an automatic validation tool. My goal was to improve this infrastructure so that it detects errors in manuscripts by itself before they are compiled into PDF or LaTeX.
+My work exeperience topic was defined to answer this problem. The team set up a document generation ecosystem based on Microdown (a markup language) and is currently developping Valiboky, an automatic validation tool. My goal was to improve this infrastructure so that it detects errors in manuscripts by itself before they are compiled into PDF or LaTeX.
 
 In this report, I will detail the different steps of my work on this tool:
 
-- **Chapter 1** looks back at my integration into the team, my discovery of the Pharo environment and its version control tools like Iceberg.
+- **Chapter 1** looks back at my integration into the team, my discovery of the Pharo environment and its version control tools such as Iceberg.
 
-- **Chapter 2** explains how the syntax analysis (AST) works and the corrections I made to the parser to improve error traceability.
+- **Chapter 2** explains how the syntax analysis (AST) works and the corrections I made to the parser to improve error tracability.
 
-- **Chapter 3** is dedicated to the core of my development: the design of my own verification rules (the Checkers) by applying the TDD method.
+- **Chapter 3** is dedicated to the core of my development: the design of my own check rules (the Checkers) by applying the TDD method.
 
-- **Chapter 4** shows the concrete application of these developments during the generation of real books, with a focus on managing English typography.
+- **Chapter 4** shows the concrete application of these developments during the generation of real books, with a focus on managing English typography adn/or anglophone.
 
 <div style="page-break-after: always;"></div>
 
@@ -191,6 +191,8 @@ Concrètement, pour que l'ordinateur comprenne un document Microdown (le langage
 
 C'est cet arbre que le moteur Pillar va ensuite récupérer pour générer le rendu final en PDF ou en LaTeX (un standard très utilisé dans la recherche pour sa mise en page impeccable). Et pour parcourir cet arbre de données sans altérer sa structure, toute l'architecture s'appuie sur le Design Pattern Visitor.
 
+
+corriger schéma
 ```mermaid
 graph LR
     subgraph Document Microdown
