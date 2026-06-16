@@ -43,6 +43,26 @@
 
 <div style="page-break-after: always;"></div>
 
+<div style="page-break-before: always;"></div> 
+
+<div style="width: 80%; margin: 0 auto; padding-top: 15vh; text-align: justify;">
+
+# Remerciements
+
+Je tiens tout d'abord à remercier chaleureusement mon tuteur de stage en entreprise, **Monsieur Stéphane Ducasse**, pour le temps précieux qu'il m'a consacré, pour son immense patience et pour la confiance qu'il m'a accordée. Son accompagnement m'a permis de monter en compétences dans les meilleures conditions tout au long de ces semaines.
+
+Je souhaite également adresser un remerciement tout particulier à ** Faouzi ** et ** **, qui m'ont extrêmement bien guidé à mes débuts et sans qui la prise en main de ce nouvel environnement aurait été beaucoup plus complexe.
+
+Mes remerciements s'adressent plus globalement à l'ensemble de **l'équipe Evref et aux membres de la communauté Pharo** pour leur accueil, leur bienveillance et leur aide technique au quotidien.
+
+Je souhaite exprimer ma gratitude envers mon tuteur universitaire, **Monsieur Géry Casiez**, pour son suivi attentif, ses conseils avisés et son accompagnement tout au long de ce projet. 
+
+Enfin, je remercie l'ensemble de l'équipe pédagogique du département Informatique de **l'IUT de Lille** pour la qualité de la formation dispensée durant ces deux années de BUT, ainsi que mes proches pour leur soutien.
+
+</div>
+
+<div style="page-break-after: always;"></div> 
+
 
 <div style="page-break-before: always;"></div> 
 
@@ -191,8 +211,6 @@ Concrètement, pour que l'ordinateur comprenne un document Microdown (le langage
 
 C'est cet arbre que le moteur Pillar va ensuite récupérer pour générer le rendu final en PDF ou en LaTeX (un standard très utilisé dans la recherche pour sa mise en page impeccable). Et pour parcourir cet arbre de données sans altérer sa structure, toute l'architecture s'appuie sur le Design Pattern Visitor.
 
-
-corriger schéma
 ```mermaid
 graph LR
     subgraph Document Microdown
