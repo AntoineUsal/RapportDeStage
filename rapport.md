@@ -51,11 +51,11 @@
 
 Je tiens tout d'abord à remercier chaleureusement mon tuteur de stage en entreprise, **Monsieur Stéphane Ducasse**, pour le temps précieux qu'il m'a consacré, pour son immense patience et pour la confiance qu'il m'a accordée. Son accompagnement m'a permis de monter en compétences dans les meilleures conditions tout au long de ces semaines.
 
-Je souhaite également adresser un remerciement tout particulier à ** Faouzi ** et ** **, qui m'ont extrêmement bien guidé à mes débuts et sans qui la prise en main de ce nouvel environnement aurait été beaucoup plus complexe.
+Je souhaite également adresser un remerciement tout particulier à **Faouzi Mokhefi** et **Guillermo Polito**, qui m'ont extrêmement bien guidé à mes débuts et sans qui la prise en main de ce nouvel environnement aurait été beaucoup plus complexe.
 
 Mes remerciements s'adressent plus globalement à l'ensemble de **l'équipe Evref et aux membres de la communauté Pharo** pour leur accueil, leur bienveillance et leur aide technique au quotidien.
 
-Je souhaite exprimer ma gratitude envers mon tuteur universitaire, **Monsieur Géry Casiez**, pour son suivi attentif, ses conseils avisés et son accompagnement tout au long de ce projet. 
+Je souhaite exprimer ma gratitude envers mon tuteur universitaire, **Monsieur Géry Casiez**, pour ses conseils et son accompagnement tout au long de ce stage. 
 
 Enfin, je remercie l'ensemble de l'équipe pédagogique du département Informatique de **l'IUT de Lille** pour la qualité de la formation dispensée durant ces deux années de BUT, ainsi que mes proches pour leur soutien.
 
